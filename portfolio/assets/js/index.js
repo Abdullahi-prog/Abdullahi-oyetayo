@@ -1,6 +1,9 @@
-//===============================
-// HAMBURGER MENU
-//===============================
+console.log("JS is connected");
+
+
+//=====================================
+//        MOBILE NAVBAR
+//=====================================
 
 const hamburger = document.querySelector(".hamburger");
 const navLinks = document.querySelector(".nav-links");
@@ -20,51 +23,13 @@ if(hamburger){
 
 
 
-document.querySelectorAll(".nav-links a").forEach(link=>{
+document.querySelectorAll(".nav-links a").forEach((link)=>{
 
     link.addEventListener("click",()=>{
 
         navLinks.classList.remove("active");
 
-    });
-
-});
-
-
-
-
-//===============================
-// NAVBAR SCROLL EFFECT
-//===============================
-
-const navbar = document.querySelector(".navbar");
-
-
-window.addEventListener("scroll",()=>{
-
-    if(window.scrollY > 50){
-
-        navbar.classList.add("active");
-
-    }else{
-
-        navbar.classList.remove("active");
-
-    }
-
-});
-
-
-
-//=====================================
-//       CLOSE MENU ON CLICK
-//=====================================
-
-document.querySelectorAll(".nav-links a").forEach((link) => {
-
-    link.addEventListener("click", () => {
-
-        navLinks.classList.remove("active");
+        hamburger.classList.remove("active");
 
     });
 
@@ -74,31 +39,38 @@ document.querySelectorAll(".nav-links a").forEach((link) => {
 
 
 //=====================================
-//      NAVBAR SCROLL EFFECT
+//        NAVBAR SCROLL EFFECT
 //=====================================
 
 const navbar = document.querySelector(".navbar");
 
 
-window.addEventListener("scroll", () => {
+if(navbar){
 
-    if (window.scrollY > 50) {
+    window.addEventListener("scroll",()=>{
 
-        navbar.classList.add("active");
+        if(window.scrollY > 50){
 
-    }
+            navbar.classList.add("active");
 
-    else {
+        }
 
-        navbar.classList.remove("active");
+        else{
 
-    }
+            navbar.classList.remove("active");
 
-});
-//===============================
-// TYPING ANIMATION
-//===============================
+        }
 
+    });
+
+}
+
+
+
+
+//=====================================
+//        TYPING ANIMATION
+//=====================================
 
 const typingText = document.querySelector(".typing-text");
 
@@ -119,7 +91,9 @@ const words = [
 
 
 let wordIndex = 0;
+
 let letterIndex = 0;
+
 let deleting = false;
 
 
@@ -134,15 +108,13 @@ function type(){
 
     if(deleting){
 
-        typingText.textContent =
-        currentWord.substring(0,letterIndex--);
+        typingText.textContent = currentWord.substring(0, letterIndex--);
 
     }
 
     else{
 
-        typingText.textContent =
-        currentWord.substring(0,letterIndex++);
+        typingText.textContent = currentWord.substring(0, letterIndex++);
 
     }
 
@@ -176,14 +148,16 @@ function type(){
     }
 
 
-
     setTimeout(type, deleting ? 70 : 120);
-
 
 }
 
 
 type();
+
+
+
+
 //=====================================
 //      CONTACT FORM TO WHATSAPP
 //=====================================
@@ -191,24 +165,26 @@ type();
 const contactForm = document.querySelector(".contact-form");
 
 
-contactForm.addEventListener("submit", (e) => {
+if(contactForm){
 
-    e.preventDefault();
+    contactForm.addEventListener("submit",(e)=>{
 
-
-    const name = document.getElementById("name").value;
-
-    const email = document.getElementById("email").value;
-
-    const phone = document.getElementById("phone").value;
-
-    const subject = document.getElementById("subject").value;
-
-    const message = document.getElementById("message").value;
+        e.preventDefault();
 
 
+        const name = document.getElementById("name").value;
 
-    const whatsappMessage =
+        const email = document.getElementById("email").value;
+
+        const phone = document.getElementById("phone").value;
+
+        const subject = document.getElementById("subject").value;
+
+        const message = document.getElementById("message").value;
+
+
+
+        const whatsappMessage =
 
 `Hello ABDULLAHI,
 
@@ -224,18 +200,24 @@ Message: ${message}`;
 
 
 
-    const whatsappURL =
+        const whatsappURL =
 
 `https://wa.me/2348105860334?text=${encodeURIComponent(whatsappMessage)}`;
 
 
 
-    window.open(whatsappURL, "_blank");
+        window.open(whatsappURL,"_blank");
 
 
-    contactForm.reset();
+        contactForm.reset();
 
-});
+    });
+
+}
+
+
+
+
 //=====================================
 //      ACTIVE NAVIGATION LINKS
 //=====================================
@@ -245,19 +227,17 @@ const sections = document.querySelectorAll("section");
 const navItems = document.querySelectorAll(".nav-links a");
 
 
-window.addEventListener("scroll", () => {
+window.addEventListener("scroll",()=>{
 
     let currentSection = "";
 
 
-    sections.forEach((section) => {
+    sections.forEach((section)=>{
 
         const sectionTop = section.offsetTop - 150;
 
-        const sectionHeight = section.clientHeight;
 
-
-        if (window.scrollY >= sectionTop) {
+        if(window.scrollY >= sectionTop){
 
             currentSection = section.getAttribute("id");
 
@@ -266,12 +246,13 @@ window.addEventListener("scroll", () => {
     });
 
 
-    navItems.forEach((link) => {
+
+    navItems.forEach((link)=>{
 
         link.classList.remove("active");
 
 
-        if (link.getAttribute("href") === `#${currentSection}`) {
+        if(link.getAttribute("href") === `#${currentSection}`){
 
             link.classList.add("active");
 
@@ -280,39 +261,49 @@ window.addEventListener("scroll", () => {
     });
 
 });
+
+
+
+
 //=====================================
 //       SCROLL REVEAL ANIMATION
 //=====================================
 
 const revealElements = document.querySelectorAll(
-    "section, .service-card, .skill-card, .project-card, .about-card, .contact-box"
+
+"section, .service-card, .skill-card, .project-card, .about-card, .contact-box"
+
 );
+
 
 
 function revealOnScroll(){
 
     revealElements.forEach((element)=>{
 
+
         const elementTop = element.getBoundingClientRect().top;
 
-        const windowHeight = window.innerHeight;
 
-
-        if(elementTop < windowHeight - 100){
+        if(elementTop < window.innerHeight - 100){
 
             element.classList.add("show");
 
         }
+
 
     });
 
 }
 
 
-window.addEventListener("scroll", revealOnScroll);
-
+window.addEventListener("scroll",revealOnScroll);
 
 revealOnScroll();
+
+
+
+
 //=====================================
 //        SCROLL TO TOP BUTTON
 //=====================================
@@ -330,7 +321,7 @@ document.body.appendChild(scrollTopBtn);
 
 
 
-window.addEventListener("scroll", () => {
+window.addEventListener("scroll",()=>{
 
 
     if(window.scrollY > 500){
@@ -352,6 +343,7 @@ window.addEventListener("scroll", () => {
 
 scrollTopBtn.addEventListener("click",()=>{
 
+
     window.scrollTo({
 
         top:0,
@@ -360,15 +352,17 @@ scrollTopBtn.addEventListener("click",()=>{
 
     });
 
+
 });
+
+
+
+
 //=====================================
 //        IMAGE LAZY LOADING
 //=====================================
 
-const images = document.querySelectorAll("img");
-
-
-images.forEach((image)=>{
+document.querySelectorAll("img").forEach((image)=>{
 
     image.setAttribute("loading","lazy");
 
@@ -378,12 +372,15 @@ images.forEach((image)=>{
 
 
 //=====================================
-//        HOVER EFFECT FOR CARDS
+//        CARD HOVER EFFECT
 //=====================================
 
 const cards = document.querySelectorAll(
-    ".service-card, .skill-card, .project-card, .about-card"
+
+".service-card, .skill-card, .project-card, .about-card"
+
 );
+
 
 
 cards.forEach((card)=>{
@@ -400,9 +397,9 @@ cards.forEach((card)=>{
         const y = e.clientY - rect.top;
 
 
-        card.style.setProperty("--x", `${x}px`);
+        card.style.setProperty("--x",`${x}px`);
 
-        card.style.setProperty("--y", `${y}px`);
+        card.style.setProperty("--y",`${y}px`);
 
 
     });
